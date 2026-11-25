@@ -7,6 +7,7 @@
 # It waits for request files in /tmp/blip-capture:
 #
 #   <name>.req containing   ours <blip arguments...>   shows a banner with the repo's build, captures it
+#                                                       (separate the words with tabs if one has spaces)
 #                           empty                       captures the corner with no banner
 #                           native                      beeps and asks you to press a volume key
 #
@@ -47,7 +48,13 @@ while true; do
   for req in "$DIR"/*.req; do
     [ -e "$req" ] || continue
     name=$(basename "$req" .req)
-    read -r -a words < "$req"
+    # Words are split on tabs when the request has any (so an argument can contain spaces),
+    # otherwise on spaces.
+    if grep -q $'\t' "$req"; then
+      IFS=$'\t' read -r -a words < "$req"
+    else
+      read -r -a words < "$req"
+    fi
     rm -f "$req"
     echo "Request $name: ${words[*]:-}"
     case "${words[0]:-}" in

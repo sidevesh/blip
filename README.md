@@ -8,9 +8,18 @@
 <p align="center">
   <img src="Docs/banners-dark.png" alt="Blip banners: volume, low battery, brightness, AirPods, microphones, media, keyboard backlight, charging, Wi-Fi, DPI, success and a custom slider" width="820">
 </p>
-macOS has no public API for these banners: the system draws them in a private process and only
-answers to Apple's own components. Blip draws them itself, matched pixel for pixel against the real
-thing, so your app's feedback looks like it belongs to the system. 🎯
+
+## 🤔 Why Blip exists
+
+On Liquid Glass macOS, apps can't show the system's own banners. They're drawn by a private system
+process that only answers to Apple's components, and despite a lot of research, no public or private
+interface turned up that lets another app call them. The private OSD interface that older tools
+relied on can only show the old, pre-Liquid Glass design.
+
+So Blip draws the banner itself. Its look was painstakingly matched to the native one, compared
+pixel by pixel against the real banner across every Liquid Glass setting (clear and tinted), light
+and dark appearance, and backgrounds from plain to busy, so your app's feedback looks like it belongs
+to the system. 🎯
 
 ## ✨ What you get
 
